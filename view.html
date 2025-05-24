@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>家計簿アプリ</title>
+    <link rel="stylesheet" href="layout.css">
+</head>
+<body>
+    <select id="month-filter">
+
+    <!-- 動的に生成 -->
+</select>
+    <form id="transaction-form">
+    <select name="type" required>
+        <option value="">選択してください</option>
+        <option value="income">収入</option>
+        <option value="expense">支出</option>
+    </select>
+    
+    <input type="number" name="amount" min="1" placeholder="金額" required>
+    
+    <select name="category" required>
+        <option value="">カテゴリを選択</option>
+        <!-- 収入カテゴリ -->
+        <option value="salary">給与</option>
+        <option value="bonus">ボーナス</option>
+        <option value="other-income">その他収入</option>
+        <!-- 支出カテゴリ -->
+        <option value="food">食費</option>
+        <option value="transport">交通費</option>
+        <option value="entertainment">娯楽費</option>
+        <option value="utilities">光熱費</option>
+        <option value="other-expense">その他支出</option>
+    </select>
+    
+    <input type="text" name="description" placeholder="説明（任意）">
+    <input type="date" name="date" required>
+    
+    <button type="submit">追加</button>
+</form>
+    <script src="controller.js"></script>
+</body>
+</html>
