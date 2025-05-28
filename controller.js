@@ -4,20 +4,28 @@ const totalDisplay = document.getElementById('total-amount');
 form.addEventListener('submit', handleSubmit);
 
 // 全データを配列で管理
-let transactionData = [] = (document.forms.transactionform) ;
+let transactionData = {
+        id: Date.now(),
+        type: form.elements.type,
+        category: form.elements.category,
+        amount: form.elements.amount,
+        date: form.elements.date,
+        description: form.elements.description,
+    };
+
+function handleSubmit(event) {
+    event.preventDefault();
+    addTransaction();
+}
 
 function addTransaction(transactionData){
+    console.log(transactionData);
+    const transactions = [];
     transactions.push(transactonData);
     saveToLocalStorage();
     renderTransactions();
     updateTotals();
 }
-
-function handleSubmit(event) {
-    event.preventDefault();
-    return addTransaction
-}
-
 
 function renderTransactions(filteredData = transactions) {
     
