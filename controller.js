@@ -1,39 +1,21 @@
 const form = document.getElementById("transaction-form")
 const table = document.querySelector("#transactions-table tbody")
 const totalDisplay = document.getElementById('total-amount');
-
-const transaction = {
-    id: Date.now(), 
-    type: 'income' | 'expense', 
-    amount: '', 
-    category: '', 
-    description: '', 
-    date: '' 
-};
-
-
-const createTableRow = (transaction) => {
-    const row = document.createElement('tr');
-    row.innerHTML = `...`;
-    return row;
-};
-
 form.addEventListener('submit', handleSubmit);
 
-
-
 // 全データを配列で管理
-let transactions = [];
-
-function handleSubmit(event) {
-    event.preventDefault();
-}
+let transactionData = [] = (document.forms.transactionform) ;
 
 function addTransaction(transactionData){
     transactions.push(transactonData);
     saveToLocalStorage();
     renderTransactions();
     updateTotals();
+}
+
+function handleSubmit(event) {
+    event.preventDefault();
+    return addTransaction
 }
 
 

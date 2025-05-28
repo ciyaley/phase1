@@ -11,9 +11,11 @@
 
     <!-- 動的に生成 -->
 </select>
+<option value="">選択してください</option>
     <form id="transaction-form">
     <select name="type" required>
-        <option value="">選択してください</option>
+
+        
         <option value="income">収入</option>
         <option value="expense">支出</option>
     </select>
@@ -33,7 +35,7 @@
         <option value="utilities">光熱費</option>
         <option value="other-expense">その他支出</option>
     </select>
-    
+  
     <input type="text" name="description" placeholder="説明（任意）">
     <input type="date" name="date" required>
     
