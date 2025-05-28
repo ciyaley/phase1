@@ -11,9 +11,10 @@
 
     <!-- 動的に生成 -->
 </select>
-<option value="">選択してください</option>
+
     <form id="transaction-form">
     <select name="type" required>
+        <option value="">選択してください</option>
         <option value="income">収入</option>
         <option value="expense">支出</option>
     </select>
@@ -39,6 +40,19 @@
     
     <button type="submit">追加</button>
 </form>
+    <table id="transaction-table">
+        <thead>
+            <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- 動的に生成 -->
+        </tbody>
     <script src="controller.js"></script>
 </body>
 </html>

@@ -1,49 +1,37 @@
 const form = document.getElementById("transaction-form")
-const table = document.querySelector("#transactions-table tbody")
 const totalDisplay = document.getElementById('total-amount');
 form.addEventListener('submit', handleSubmit);
-
 // 全データを配列で管理
-let transactionData = {
-        id: Date.now(),
-        type: form.elements.type,
-        category: form.elements.category,
-        amount: form.elements.amount,
-        date: form.elements.date,
-        description: form.elements.description,
-    };
-
 function handleSubmit(event) {
+    console.log(event)
     event.preventDefault();
-    addTransaction();
+    const formData = new FormData(form);
+    const rawData = Object.fromEntries(formData);
+
+    let transactionData = 
+    {
+    id: Date.now(),
+    ...rawData, 
+    amount: Number(rawData.amount)
+    };
+    addTransaction(transactionData);
 }
 
 function addTransaction(transactionData){
-    console.log(transactionData);
     const transactions = [];
-    transactions.push(transactonData);
-    saveToLocalStorage();
-    renderTransactions();
-    updateTotals();
+    transactions.push(transactionData);
+    console.log(transactions);
+    saveToLocalStorage(transactions);
 }
 
-function renderTransactions(filteredData = transactions) {
-    
-}
-
-function upadateTotals(){
-    const totalIncom = transactions.filter(t => t.type === 'income').reduce((sum, t) => sum + t.amount, 0);
-    const totalExpense = transactions.filter(t => t.type === 'expense').reduce((sum, t) => sum + t.amount, 0);
-    const balance = totalIncome - totalExpense;
-}
-
-function saveToLocalStorage() {
+function saveToLocalStorage(transactions) {
     localStorage.setItem('transaction', JSON.stringify(transactions)); 
 }
 
-function loadFromLocalStorage() {
+
+function loadFromLocalStorage(transactions) {
     const saved = localStorage.getItem('transactions');
-    transactions = saved ? JSON.parse(saved) : [];
+    transactionsDisplay = saved ? JSON.parse(saved) : [];
 }
 
 function filterByMonth(yearMonth) {
@@ -52,26 +40,3 @@ function filterByMonth(yearMonth) {
     );
 }
 
-function validateTransaction(data) {
-    const errors = [];
-    
-
-    if (!data.amount || data.amount <= 0) {
-        errors.push('金額は1円以上で入力してください');
-    }
-    
-
-    if (!data.category) {
-        errors.push('カテゴリを選択してください');
-    }
-    
-  
-    if (!data.date) {
-        errors.push('日付を入力してください');
-    }
-    
-    return {
-        isValid: errors.length === 0,
-        errors: errors
-    };
-}
