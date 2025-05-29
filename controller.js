@@ -1,9 +1,10 @@
 const form = document.getElementById("transaction-form")
 const totalDisplay = document.getElementById('total-amount');
-form.addEventListener('submit', handleSubmit);
+let transactions = [];
+
 // 全データを配列で管理
 function handleSubmit(event) {
-    console.log(event)
+
     event.preventDefault();
     const formData = new FormData(form);
     const rawData = Object.fromEntries(formData);
@@ -18,9 +19,8 @@ function handleSubmit(event) {
 }
 
 function addTransaction(transactionData){
-    const transactions = [];
     transactions.push(transactionData);
-    console.log(transactions);
+
     saveToLocalStorage(transactions);
 }
 
@@ -29,9 +29,25 @@ function saveToLocalStorage(transactions) {
 }
 
 
-function loadFromLocalStorage(transactions) {
-    const saved = localStorage.getItem('transactions');
-    transactionsDisplay = saved ? JSON.parse(saved) : [];
+
+function createTableRow() {
+    const tbody = document.querySelector('#transaction-table tbody');
+    tbody.innerHTML = ''; // Clear existing rows
+    const saved = localStorage.getItem("transaction");
+    console.log(saved)
+
+    
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${saved.date}</td>
+            <td>${saved.type}</td>
+            <td>${saved.description}</td>
+            <td>${saved.amount}</td>
+        `;
+        tbody.appendChild(row);
+    
+
+    // updateTotalAmount();
 }
 
 function filterByMonth(yearMonth) {
@@ -40,3 +56,8 @@ function filterByMonth(yearMonth) {
     );
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+
+    createTableRow();
+    form.addEventListener('submit', handleSubmit);
+});
